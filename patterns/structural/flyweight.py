@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 *What is this pattern about?
 This pattern aims to minimise the number of objects that are needed by
@@ -31,7 +28,7 @@ Minimizes memory usage by sharing data with other similar objects.
 import weakref
 
 
-class Card(object):
+class Card:
     """The Flyweight"""
 
     # Could be a simple dict.
@@ -56,7 +53,7 @@ class Card(object):
     #     self.value, self.suit = value, suit
 
     def __repr__(self):
-        return "<Card: %s%s>" % (self.value, self.suit)
+        return f"<Card: {self.value}{self.suit}>"
 
 
 def main():
@@ -84,4 +81,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()

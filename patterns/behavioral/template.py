@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 An example of the Template pattern in Python
 
@@ -27,7 +24,7 @@ def get_csv():
 
 def convert_to_text(data):
     print("[CONVERT]")
-    return "{} as text".format(data)
+    return f"{data} as text"
 
 
 def saver():
@@ -36,7 +33,7 @@ def saver():
 
 def template_function(getter, converter=False, to_save=False):
     data = getter()
-    print("Got `{}`".format(data))
+    print(f"Got `{data}`")
 
     if len(data) <= 3 and converter:
         data = converter(data)
@@ -46,7 +43,7 @@ def template_function(getter, converter=False, to_save=False):
     if to_save:
         saver()
 
-    print("`{}` was processed".format(data))
+    print(f"`{data}` was processed")
 
 
 def main():
@@ -72,4 +69,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()

@@ -1,29 +1,23 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-from __future__ import print_function
-
-
-class Person(object):
+class Person:
     def __init__(self, name, action):
         self.name = name
         self.action = action
 
     def do_action(self):
-        print(self.name, self.action.name, end=' ')
+        print(self.name, self.action.name, end=" ")
         return self.action
 
 
-class Action(object):
+class Action:
     def __init__(self, name):
         self.name = name
 
     def amount(self, val):
-        print(val, end=' ')
+        print(val, end=" ")
         return self
 
     def stop(self):
-        print('then stop')
+        print("then stop")
 
 
 def main():
@@ -35,6 +29,7 @@ def main():
     """
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import doctest
+
     doctest.testmod()

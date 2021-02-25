@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 Example from https://en.wikipedia.org/wiki/Facade_pattern#Python
 
@@ -31,14 +28,13 @@ http://python-3-patterns-idioms-test.readthedocs.io/en/latest/ChangeInterface.ht
 Provides a simpler unified interface to a complex system.
 """
 
-from __future__ import print_function
-
 
 # Complex computer parts
-class CPU(object):
+class CPU:
     """
     Simple CPU representation.
     """
+
     def freeze(self):
         print("Freezing processor.")
 
@@ -49,26 +45,29 @@ class CPU(object):
         print("Executing.")
 
 
-class Memory(object):
+class Memory:
     """
     Simple memory representation.
     """
+
     def load(self, position, data):
-        print("Loading from {0} data: '{1}'.".format(position, data))
+        print(f"Loading from {position} data: '{data}'.")
 
 
-class SolidStateDrive(object):
+class SolidStateDrive:
     """
     Simple solid state drive representation.
     """
+
     def read(self, lba, size):
-        return "Some data from sector {0} with size {1}".format(lba, size)
+        return f"Some data from sector {lba} with size {size}"
 
 
-class ComputerFacade(object):
+class ComputerFacade:
     """
     Represents a facade for various computer parts.
     """
+
     def __init__(self):
         self.cpu = CPU()
         self.memory = Memory()
@@ -94,4 +93,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod(optionflags=doctest.ELLIPSIS)

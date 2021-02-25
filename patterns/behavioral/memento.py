@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 http://code.activestate.com/recipes/413838-memento-closure/
 
@@ -8,8 +5,7 @@ http://code.activestate.com/recipes/413838-memento-closure/
 Provides the ability to restore an object to its previous state.
 """
 
-from copy import copy
-from copy import deepcopy
+from copy import copy, deepcopy
 
 
 def memento(obj, deep=False):
@@ -22,7 +18,7 @@ def memento(obj, deep=False):
     return restore
 
 
-class Transaction(object):
+class Transaction:
     """A transaction guard.
 
     This is, in fact, just syntactic sugar around a memento closure.
@@ -44,7 +40,7 @@ class Transaction(object):
             a_state()
 
 
-class Transactional(object):
+class Transactional:
     """Adds transactional semantics to methods. Methods decorated  with
 
     @Transactional will rollback to entry-state upon exceptions.
@@ -65,19 +61,19 @@ class Transactional(object):
         return transaction
 
 
-class NumObj(object):
+class NumObj:
     def __init__(self, value):
         self.value = value
 
     def __repr__(self):
-        return '<%s: %r>' % (self.__class__.__name__, self.value)
+        return f"<{self.__class__.__name__}: {self.value!r}>"
 
     def increment(self):
         self.value += 1
 
     @Transactional
     def do_stuff(self):
-        self.value = '1111'  # <- invalid value
+        self.value = "1111"  # <- invalid value
         self.increment()  # <- will fail and rollback
 
 
@@ -137,4 +133,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod(optionflags=doctest.ELLIPSIS)

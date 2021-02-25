@@ -1,23 +1,19 @@
-dist: xenial
+os: linux
+dist: focal
 language: python
 
-sudo: false
-
-matrix:
+jobs:
   include:
-    - python: "2.7"
-      env: TOXENV=ci27
-    - python: "3.6"
-      env: TOXENV=ci36
-    - python: "3.7"
-      env: TOXENV=ci37
+    - python: "3.8"
+      env: TOXENV=py38
+    - python: "3.9"
+      env: TOXENV=py39
 
 cache:
   - pip
 
 install:
-  - pip install tox
-  - pip install codecov
+  - pip install codecov tox
 
 script:
   - tox

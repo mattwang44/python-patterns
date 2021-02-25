@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """*What is this pattern about?
 A Factory is an object for creating other objects.
 
@@ -28,34 +25,33 @@ http://ginstrom.com/scribbles/2007/10/08/design-patterns-python-style/
 Creates objects without having to specify the exact class.
 """
 
-from __future__ import unicode_literals
-from __future__ import print_function
 
-
-class GreekLocalizer(object):
+class GreekLocalizer:
     """A simple localizer a la gettext"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.translations = {"dog": "σκύλος", "cat": "γάτα"}
 
-    def localize(self, msg):
+    def localize(self, msg: str) -> str:
         """We'll punt if we don't have a translation"""
         return self.translations.get(msg, msg)
 
 
-class EnglishLocalizer(object):
+class EnglishLocalizer:
     """Simply echoes the message"""
 
-    def localize(self, msg):
+    def localize(self, msg: str) -> str:
         return msg
 
 
-def get_localizer(language="English"):
+def get_localizer(language: str = "English") -> object:
+
     """Factory"""
     localizers = {
         "English": EnglishLocalizer,
         "Greek": GreekLocalizer,
     }
+
     return localizers[language]()
 
 
@@ -76,4 +72,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()

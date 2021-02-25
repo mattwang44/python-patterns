@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-
 class RegistryHolder(type):
 
     REGISTRY = {}
@@ -20,13 +16,12 @@ class RegistryHolder(type):
         return dict(cls.REGISTRY)
 
 
-class BaseRegisteredClass(object):
+class BaseRegisteredClass(metaclass=RegistryHolder):
     """
     Any class that will inherits from BaseRegisteredClass will be included
     inside the dict RegistryHolder.REGISTRY, the key being the name of the
     class and the associated value, the class itself.
     """
-    __metaclass__ = RegistryHolder
 
 
 def main():
@@ -47,4 +42,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod(optionflags=doctest.ELLIPSIS)

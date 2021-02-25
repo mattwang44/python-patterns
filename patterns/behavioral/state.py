@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 Implementation of the state pattern
 
@@ -11,10 +8,8 @@ Implements state as a derived class of the state pattern interface.
 Implements state transitions by invoking methods from the pattern's superclass.
 """
 
-from __future__ import print_function
 
-
-class State(object):
+class State:
 
     """Base state. This is to share functionality"""
 
@@ -23,7 +18,7 @@ class State(object):
         self.pos += 1
         if self.pos == len(self.stations):
             self.pos = 0
-        print(u"Scanning... Station is %s %s" % (self.stations[self.pos], self.name))
+        print("Scanning... Station is {} {}".format(self.stations[self.pos], self.name))
 
 
 class AmState(State):
@@ -34,7 +29,7 @@ class AmState(State):
         self.name = "AM"
 
     def toggle_amfm(self):
-        print(u"Switching to FM")
+        print("Switching to FM")
         self.radio.state = self.radio.fmstate
 
 
@@ -46,11 +41,11 @@ class FmState(State):
         self.name = "FM"
 
     def toggle_amfm(self):
-        print(u"Switching to AM")
+        print("Switching to AM")
         self.radio.state = self.radio.amstate
 
 
-class Radio(object):
+class Radio:
 
     """A radio.     It has a scan button, and an AM/FM toggle switch."""
 
@@ -67,29 +62,28 @@ class Radio(object):
         self.state.scan()
 
 
-# Test our radio out
 def main():
-    radio = Radio()
-    actions = [radio.scan] * 2 + [radio.toggle_amfm] + [radio.scan] * 2
-    actions *= 2
+    """
+    >>> radio = Radio()
+    >>> actions = [radio.scan] * 2 + [radio.toggle_amfm] + [radio.scan] * 2
+    >>> actions *= 2
 
-    for action in actions:
-        action()
+    >>> for action in actions:
+    ...    action()
+    Scanning... Station is 1380 AM
+    Scanning... Station is 1510 AM
+    Switching to FM
+    Scanning... Station is 89.1 FM
+    Scanning... Station is 103.9 FM
+    Scanning... Station is 81.3 FM
+    Scanning... Station is 89.1 FM
+    Switching to AM
+    Scanning... Station is 1250 AM
+    Scanning... Station is 1380 AM
+    """
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    import doctest
 
-
-OUTPUT = """
-Scanning... Station is 1380 AM
-Scanning... Station is 1510 AM
-Switching to FM
-Scanning... Station is 89.1 FM
-Scanning... Station is 103.9 FM
-Scanning... Station is 81.3 FM
-Scanning... Station is 89.1 FM
-Switching to AM
-Scanning... Station is 1250 AM
-Scanning... Station is 1380 AM
-"""
+    doctest.testmod()

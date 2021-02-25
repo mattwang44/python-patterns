@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 *What is this pattern about?
 Define a family of algorithms, encapsulate each one, and make them interchangeable.
@@ -51,4 +48,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()

@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 http://peter-hoffmann.com/2010/extrinsic-visitor-pattern-python-inheritance.html
 
@@ -19,7 +16,7 @@ which is then being used e.g. in tools like `pyflakes`.
 """
 
 
-class Node(object):
+class Node:
     pass
 
 
@@ -35,11 +32,11 @@ class C(A, B):
     pass
 
 
-class Visitor(object):
+class Visitor:
     def visit(self, node, *args, **kwargs):
         meth = None
         for cls in node.__class__.__mro__:
-            meth_name = 'visit_' + cls.__name__
+            meth_name = "visit_" + cls.__name__
             meth = getattr(self, meth_name, None)
             if meth:
                 break
@@ -49,10 +46,10 @@ class Visitor(object):
         return meth(node, *args, **kwargs)
 
     def generic_visit(self, node, *args, **kwargs):
-        print('generic_visit ' + node.__class__.__name__)
+        print("generic_visit " + node.__class__.__name__)
 
     def visit_B(self, node, *args, **kwargs):
-        print('visit_B ' + node.__class__.__name__)
+        print("visit_B " + node.__class__.__name__)
 
 
 def main():
@@ -73,4 +70,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()

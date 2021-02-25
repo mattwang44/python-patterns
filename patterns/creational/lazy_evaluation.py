@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 Lazily-evaluated property pattern in Python.
 
@@ -13,7 +10,7 @@ django
 https://github.com/django/django/blob/ffd18732f3ee9e6f0374aff9ccf350d85187fac2/django/utils/functional.py#L19
 pip
 https://github.com/pypa/pip/blob/cb75cca785629e15efb46c35903827b3eae13481/pip/utils/__init__.py#L821
-pyramimd
+pyramid
 https://github.com/Pylons/pyramid/blob/7909e9503cdfc6f6e84d2c7ace1d3c03ca1d8b73/pyramid/decorator.py#L4
 werkzeug
 https://github.com/pallets/werkzeug/blob/5a2bf35441006d832ab1ed5a31963cbc366c99ac/werkzeug/utils.py#L35
@@ -22,11 +19,10 @@ https://github.com/pallets/werkzeug/blob/5a2bf35441006d832ab1ed5a31963cbc366c99a
 Delays the eval of an expr until its value is needed and avoids repeated evals.
 """
 
-from __future__ import print_function
 import functools
 
 
-class lazy_property(object):
+class lazy_property:
     def __init__(self, function):
         self.function = function
         functools.update_wrapper(self, function)
@@ -40,7 +36,7 @@ class lazy_property(object):
 
 
 def lazy_property2(fn):
-    attr = '_lazy__' + fn.__name__
+    attr = "_lazy__" + fn.__name__
 
     @property
     def _lazy_property(self):
@@ -51,7 +47,7 @@ def lazy_property2(fn):
     return _lazy_property
 
 
-class Person(object):
+class Person:
     def __init__(self, name, occupation):
         self.name = name
         self.occupation = occupation
@@ -105,4 +101,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod(optionflags=doctest.ELLIPSIS)
